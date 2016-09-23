@@ -1,6 +1,7 @@
 package com.dataart.selenium.pages;
 
 import com.dataart.selenium.models.User;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -11,7 +12,6 @@ import java.util.Iterator;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
-
 
 /**
  * Created by amamchuk on 30.06.2016.
@@ -31,8 +31,8 @@ public class RegistrationPage extends BasicPage {
     WebElement roleDropDownMenu;
     @FindBy(xpath = REGISTER_BUTTON_XPATH)
     WebElement registerButton;
-
-
+    //String l = "";
+    String cvsSplitBy = ";";
 
     public HomePage registerAsANewUser(User user, String role) {
         nameTextField.clear();
@@ -51,80 +51,26 @@ public class RegistrationPage extends BasicPage {
         return initPage(HomePage.class);
     }
 
-    public void ddtRegistration() throws IOException {
+    public void ddtRegistration(String l) throws IOException {
 
-        String csvFile = "C:\\Users\\amamchuk\\amamchuk-aut\\Book1.csv";
-        String line = "";
-        String cvsSplitBy = ";";
+        String[] name = l.split(cvsSplitBy);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-
-            while ((line = br.readLine()) != null) {
-
-                // use comma as separator
-                String[] name = line.split(cvsSplitBy);
-
-                System.out.println("Name [name= " + name[0]/* + " , surname=" + name[1] + "]"*/);
-
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        nameTextField.clear();
+        firstNameTextField.clear();
+        lastNameTextField.clear();
+        passwordTextField.clear();
+        confirmPasswordTextField.clear();
+        nameTextField.sendKeys(name[0]);
+        firstNameTextField.sendKeys(name[1]);
+        lastNameTextField.sendKeys(name[2]);
+        passwordTextField.sendKeys(name[3]);
+        confirmPasswordTextField.sendKeys(name[4]);
+        Select newSelect = new Select(roleDropDownMenu);
+        newSelect.selectByVisibleText(name[5]);
+        registerButton.click();
+        //нажать назад или сделать логаут, чтобы вновь залогиниться
+        //System.out.println("Name [name= " + name[0] + " , surname=" + name[1] + "]");
     }
-
-   /* public void ddtRegistration(BufferedReader r) throws IOException {
-        String [] csvCell;
-        while ((csvCell = r.readNext()) != null) {
-            String Name = csvCell[0];
-            String FName = csvCell[1];
-            String LName = csvCell[2];
-            String Password = csvCell[3];
-            String ConfirmPassword = csvCell[4];
-            String Role = csvCell[5];
-            nameTextField.sendKeys(Name);
-            firstNameTextField.sendKeys(FName);
-            lastNameTextField.sendKeys(LName);
-            passwordTextField.sendKeys(Password);
-            confirmPasswordTextField.sendKeys(ConfirmPassword);
-            Select newSelect = new Select(roleDropDownMenu);
-            newSelect.selectByVisibleText(Role);
-            registerButton.click();
-        }
-    }*/
-
-    /*public void ddtRegistration() throws IOException {
-        InputStream in = new FileInputStream("Book1.xlsx");
-        HSSFWorkbook wb = new HSSFWorkbook(in);
-
-        Sheet sheet = wb.getSheetAt(0);
-        Iterator<org.apache.poi.ss.usermodel.Row> it = sheet.iterator();
-        while (it.hasNext()) {
-            org.apache.poi.ss.usermodel.Row row = it.next();
-            Iterator<Cell> cells = row.iterator();
-            while (cells.hasNext()) {
-                Cell cell = cells.next();
-                int cellType = cell.getCellType();
-                switch (cellType) {
-                    case Cell.CELL_TYPE_STRING:
-                        System.out.print(cell.getStringCellValue() + "=");
-                        break;
-                    case Cell.CELL_TYPE_NUMERIC:
-                        System.out.print("[" + cell.getNumericCellValue() + "]");
-                        break;
-
-                    case Cell.CELL_TYPE_FORMULA:
-                        System.out.print("[" + cell.getNumericCellValue() + "]");
-                        break;
-                    default:
-                        System.out.print("|");
-                        break;
-                }
-            }
-            System.out.println();
-        }
-        }*/
-
 
     public static final String NAME_TEXT_FIELD_XPATH = "//input[@name = 'name']";
     public static final String FIRST_NAME_TEXT_FIELD_XPATH = "//input[@name = 'fname']";
