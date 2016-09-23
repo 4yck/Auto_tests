@@ -19,7 +19,7 @@ public class NewApplication extends BasicPage {
     @FindBy(xpath = CREATE_BUTTON_XPATH)
     WebElement createButton;
 
-    public MyApplications createNewApplication() {
+    public NewApplication createNewApplication() {
         titleField.clear();
         descriptionField.clear();
         titleField.sendKeys("App_01");
@@ -27,7 +27,7 @@ public class NewApplication extends BasicPage {
         Select newSelect = new Select(categoryField);
         newSelect.selectByVisibleText("News");
         createButton.click();
-        return initPage(MyApplications.class);
+        return initPage(NewApplication.class);
     }
 
     public String getTitle() {

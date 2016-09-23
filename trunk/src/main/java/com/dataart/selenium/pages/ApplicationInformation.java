@@ -2,6 +2,7 @@ package com.dataart.selenium.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 /**
  * Created by amamchuk on 04.08.2016.
@@ -37,6 +38,10 @@ public class ApplicationInformation extends BasicPage{
     public JsonResponse downloadButtonClick () {
         downloadButton.click();
         return initPage(JsonResponse.class);
+    }
+
+    public void assertMethod(){
+        Assert.assertTrue(downloadButton.isDisplayed());
     }
 
     public static final String DOWNLOAD_BUTTON_XPATH = "//a[contains(text(),'Download')]";

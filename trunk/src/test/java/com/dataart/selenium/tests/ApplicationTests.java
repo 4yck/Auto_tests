@@ -9,8 +9,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 //import org.apache.log4j.Logger;
 
-import java.io.IOException;
-
 import static com.dataart.selenium.framework.BasePage.initPage;
 import static com.dataart.selenium.models.UserBuilder.admin;
 import static com.dataart.selenium.models.UserBuilder.newDeveloper;
@@ -64,5 +62,7 @@ public class ApplicationTests extends BaseTest {
         headerPage.myApplicationsButtonClick();
         myapplicationsPage.myApplicationsButtonClick();
         newapplicationPage.createNewApplication();
+        myapplicationsPage.detailsButtonClick();
+        appInfo.assertMethod();
     }
 }
