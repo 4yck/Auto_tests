@@ -24,6 +24,8 @@ public class ApplicationInformation extends BasicPage{
     WebElement authorXPath;
     @FindBy(xpath = NUMBER_OF_DOWNLOADS_XPATH)
     WebElement numberXPath;
+    @FindBy(xpath = EDIT_BUTTON_XPATH)
+    WebElement editButton;
 
     public ApplicationInformation getInfo () {
         ApplicationInformation object = new ApplicationInformation();
@@ -40,6 +42,11 @@ public class ApplicationInformation extends BasicPage{
         return initPage(JsonResponse.class);
     }
 
+    public EditPage editButtonClick () {
+        editButton.click();
+        return initPage(EditPage.class);
+    }
+
     public void assertMethod(){
         Assert.assertTrue(downloadButton.isDisplayed());
     }
@@ -49,6 +56,6 @@ public class ApplicationInformation extends BasicPage{
     public static final String CATEGORY_XPATH = "//div[contains(text(),'Category')]";
     public static final String AUTHOR_XPATH = "//div[contains(text(),'Author')]";
     public static final String NUMBER_OF_DOWNLOADS_XPATH = "//div[contains(text(),'# of downloads')]";
-
+    public static final String EDIT_BUTTON_XPATH = "//div[@class='edit-app-button']/a[contains(text(),'Edit')]";
 
 }

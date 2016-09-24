@@ -13,6 +13,7 @@ import static com.dataart.selenium.framework.BasePage.initPage;
 import static com.dataart.selenium.models.UserBuilder.admin;
 import static com.dataart.selenium.models.UserBuilder.newDeveloper;
 import static com.dataart.selenium.models.UserBuilder.newUser;
+import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Created by amamchuk on 19.07.2016.
@@ -27,6 +28,8 @@ public class ApplicationTests extends BaseTest {
     private MyApplications myapplicationsPage;
     private NewApplication newapplicationPage;
     private HeaderPage headerPage;
+    private EditPage editPage;
+    private MessagePage messagePage;
     public ApplicationInformation a;
     private JsonResponse jsonresponsePage;
     private User user;
@@ -42,6 +45,8 @@ public class ApplicationTests extends BaseTest {
         homePage = initPage(HomePage.class);
         appInfo = initPage(ApplicationInformation.class);
         jsonresponsePage = initPage(JsonResponse.class);
+        editPage = initPage(EditPage.class);
+        messagePage = initPage(MessagePage.class);
         user = admin();
     }
 
@@ -64,5 +69,12 @@ public class ApplicationTests extends BaseTest {
         newapplicationPage.createNewApplication();
         myapplicationsPage.detailsButtonClick();
         appInfo.assertMethod();
+        appInfo.editButtonClick();
+        editPage.updateApplication();
+        assertMessage();
+    }
+
+    private void assertMessage(){
+        assertThat(messagePage.getEditMessage()).isEqualTo("Application edited");
     }
 }
