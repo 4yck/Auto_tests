@@ -66,12 +66,24 @@ public class ApplicationTests extends BaseTest {
         registrationPage.registerAsANewUser(user,"DEVELOPER");
         headerPage.myApplicationsButtonClick();
         myapplicationsPage.myApplicationsButtonClick();
-        newapplicationPage.createNewApplication();
+        newapplicationPage.createNewApplicationWithoutImages();
         myapplicationsPage.detailsButtonClick();
         appInfo.assertMethod();
         appInfo.editButtonClick();
         editPage.updateApplication();
         assertMessage();
+    }
+
+    @Test
+    public void creatingAppWithImages() {
+        user = newDeveloper();
+        loginPage.registerANewUser();
+        registrationPage.registerAsANewUser(user,"DEVELOPER");
+        headerPage.myApplicationsButtonClick();
+        myapplicationsPage.myApplicationsButtonClick();
+        newapplicationPage.createNewApplicationWithImages();
+        myapplicationsPage.detailsButtonClick();
+        appInfo.assertMethod();
     }
 
     private void assertMessage(){
