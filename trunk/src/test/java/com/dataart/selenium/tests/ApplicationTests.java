@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 //import org.apache.log4j.Logger;
 
+import static com.dataart.selenium.framework.BasePage.driver;
 import static com.dataart.selenium.framework.BasePage.initPage;
 import static com.dataart.selenium.models.UserBuilder.admin;
 import static com.dataart.selenium.models.UserBuilder.newDeveloper;
@@ -84,6 +85,25 @@ public class ApplicationTests extends BaseTest {
         newapplicationPage.createNewApplicationWithImages();
         myapplicationsPage.detailsButtonClick();
         appInfo.assertMethod();
+    }
+
+    @Test
+    public void mostPopularApps() {
+        user = newDeveloper();
+        loginPage.registerANewUser();
+        registrationPage.registerAsANewUser(user, "DEVELOPER");
+        headerPage.myApplicationsButtonClick();
+        myapplicationsPage.myApplicationsButtonClick();
+        newapplicationPage.createNewApplicationWithoutImages();
+        myapplicationsPage.detailsButtonClick();
+        int i = 1;
+        while (i <= 5) {
+            appInfo.downloadButtonClick();
+            driver.navigate().back();
+            i = i + 1;
+        }
+        driver.navigate().refresh();
+        appInfo.printNumber();
     }
 
     private void assertMessage(){

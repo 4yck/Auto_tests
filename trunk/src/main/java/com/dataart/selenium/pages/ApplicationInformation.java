@@ -51,6 +51,8 @@ public class ApplicationInformation extends BasicPage{
         Assert.assertTrue(downloadButton.isDisplayed());
     }
 
+    public void printNumber() {System.out.println(numberXPath.getText());}
+
     public static final String DOWNLOAD_BUTTON_XPATH = "//a[contains(text(),'Download')]";
     public static final String DESCRIPTION_XPATH = "//div[contains(text(),'Description')]";
     public static final String CATEGORY_XPATH = "//div[contains(text(),'Category')]";
