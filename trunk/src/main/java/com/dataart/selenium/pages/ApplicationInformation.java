@@ -1,8 +1,11 @@
 package com.dataart.selenium.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Created by amamchuk on 04.08.2016.
@@ -26,6 +29,8 @@ public class ApplicationInformation extends BasicPage{
     WebElement numberXPath;
     @FindBy(xpath = EDIT_BUTTON_XPATH)
     WebElement editButton;
+    @FindBy(xpath = POPULAR_APPS_XPATH)
+    WebElement popularAppButton;
 
     public ApplicationInformation getInfo () {
         ApplicationInformation object = new ApplicationInformation();
@@ -53,11 +58,24 @@ public class ApplicationInformation extends BasicPage{
 
     public void printNumber() {System.out.println(numberXPath.getText());}
 
+    public String verifyPopularApps() {
+        String name = driver.findElement(By.xpath("//div[@class='popular-app']/a/div")).getText();
+        return name;
+    }
+
+    public void verifyAppDetails() {
+        popularAppButton.click();
+        Assert.assertTrue(descriptionXPath.isDisplayed());
+        Assert.assertTrue(categoryXPath.isDisplayed());
+        Assert.assertTrue(authorXPath.isDisplayed());
+        Assert.assertTrue(numberXPath.isDisplayed());
+    }
+
     public static final String DOWNLOAD_BUTTON_XPATH = "//a[contains(text(),'Download')]";
     public static final String DESCRIPTION_XPATH = "//div[contains(text(),'Description')]";
     public static final String CATEGORY_XPATH = "//div[contains(text(),'Category')]";
     public static final String AUTHOR_XPATH = "//div[contains(text(),'Author')]";
     public static final String NUMBER_OF_DOWNLOADS_XPATH = "//div[contains(text(),'# of downloads')]";
     public static final String EDIT_BUTTON_XPATH = "//div[@class='edit-app-button']/a[contains(text(),'Edit')]";
-
+    public static final String POPULAR_APPS_XPATH = "//div[@class='popular-app']/a/div[contains(text(),'App_01')]";
 }

@@ -23,22 +23,23 @@ public class NewApplication extends BasicPage {
     @FindBy(xpath = CREATE_BUTTON_XPATH)
     WebElement createButton;
 
-    public NewApplication createNewApplicationWithoutImages() {
+
+    public NewApplication createNewApplicationWithoutImages(String app_name) {
         titleField.clear();
         descriptionField.clear();
-        titleField.sendKeys("App_01");
-        descriptionField.sendKeys("Description for App_01");
+        titleField.sendKeys(app_name);
+        descriptionField.sendKeys("Description for " + app_name);
         Select newSelect = new Select(categoryField);
         newSelect.selectByVisibleText("News");
         createButton.click();
         return initPage(NewApplication.class);
     }
 
-    public NewApplication createNewApplicationWithImages() {
+    public NewApplication createNewApplicationWithImages(String app_name) {
         titleField.clear();
         descriptionField.clear();
-        titleField.sendKeys("App_01");
-        descriptionField.sendKeys("Description for App_01");
+        titleField.sendKeys(app_name);
+        descriptionField.sendKeys("Description for " + app_name);
         imageButton.sendKeys("C:\\Users\\amamchuk\\Auto_tests\\фото.jpg");
         iconButton.sendKeys("C:\\Users\\amamchuk\\Auto_tests\\фото.jpg");
         Select newSelect = new Select(categoryField);
@@ -50,6 +51,8 @@ public class NewApplication extends BasicPage {
     public String getTitle() {
         return driver.findElement(By.xpath("//div[2]/h1")).getText();
     }
+
+    public String getAppName() {return "App_01";}
 
     public static final String TITLE_XPATH = "//input[@name='title']";
     public static final String DESCRIPTION_XPATH = "//textarea[@name='description']";

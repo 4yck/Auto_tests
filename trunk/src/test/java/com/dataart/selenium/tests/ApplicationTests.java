@@ -31,6 +31,7 @@ public class ApplicationTests extends BaseTest {
     private HeaderPage headerPage;
     private EditPage editPage;
     private MessagePage messagePage;
+    public String appName;
     public ApplicationInformation a;
     private JsonResponse jsonresponsePage;
     private User user;
@@ -67,12 +68,13 @@ public class ApplicationTests extends BaseTest {
         registrationPage.registerAsANewUser(user,"DEVELOPER");
         headerPage.myApplicationsButtonClick();
         myapplicationsPage.myApplicationsButtonClick();
-        newapplicationPage.createNewApplicationWithoutImages();
+        appName = newapplicationPage.getAppName();
+        newapplicationPage.createNewApplicationWithoutImages(appName);
         myapplicationsPage.detailsButtonClick();
         appInfo.assertMethod();
         appInfo.editButtonClick();
         editPage.updateApplication();
-        assertMessage();
+        assertThat(messagePage.getEditMessage()).isEqualTo("Application edited");
     }
 
     @Test
@@ -82,7 +84,8 @@ public class ApplicationTests extends BaseTest {
         registrationPage.registerAsANewUser(user,"DEVELOPER");
         headerPage.myApplicationsButtonClick();
         myapplicationsPage.myApplicationsButtonClick();
-        newapplicationPage.createNewApplicationWithImages();
+        appName = newapplicationPage.getAppName();
+        newapplicationPage.createNewApplicationWithoutImages(appName);
         myapplicationsPage.detailsButtonClick();
         appInfo.assertMethod();
     }
@@ -94,7 +97,8 @@ public class ApplicationTests extends BaseTest {
         registrationPage.registerAsANewUser(user, "DEVELOPER");
         headerPage.myApplicationsButtonClick();
         myapplicationsPage.myApplicationsButtonClick();
-        newapplicationPage.createNewApplicationWithoutImages();
+        appName = newapplicationPage.getAppName();
+        newapplicationPage.createNewApplicationWithoutImages(appName);
         myapplicationsPage.detailsButtonClick();
         int i = 1;
         while (i <= 5) {
@@ -104,9 +108,7 @@ public class ApplicationTests extends BaseTest {
         }
         driver.navigate().refresh();
         appInfo.printNumber();
-    }
-
-    private void assertMessage(){
-        assertThat(messagePage.getEditMessage()).isEqualTo("Application edited");
+        assertThat(appInfo.verifyPopularApps()).isEqualTo(appName);
+        appInfo.verifyAppDetails();
     }
 }
