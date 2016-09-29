@@ -111,4 +111,18 @@ public class ApplicationTests extends BaseTest {
         assertThat(appInfo.verifyPopularApps()).isEqualTo(appName);
         appInfo.verifyAppDetails();
     }
+
+    @Test
+    public void deleteApp() throws InterruptedException {
+        user = newDeveloper();
+        loginPage.registerANewUser();
+        registrationPage.registerAsANewUser(user, "DEVELOPER");
+        headerPage.myApplicationsButtonClick();
+        myapplicationsPage.myApplicationsButtonClick();
+        appName = newapplicationPage.getAppName();
+        newapplicationPage.createNewApplicationWithoutImages(appName);
+        myapplicationsPage.detailsButtonClick();
+        appInfo.deleteButtonClick();
+        assertThat(messagePage.getEditMessage()).isEqualTo("Deleted");
+    }
 }

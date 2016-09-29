@@ -1,5 +1,6 @@
 package com.dataart.selenium.pages;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,6 +32,8 @@ public class ApplicationInformation extends BasicPage{
     WebElement editButton;
     @FindBy(xpath = POPULAR_APPS_XPATH)
     WebElement popularAppButton;
+    @FindBy(xpath = DELETE_BUTTON_XPATH)
+    WebElement deleteButton;
 
     public ApplicationInformation getInfo () {
         ApplicationInformation object = new ApplicationInformation();
@@ -50,6 +53,14 @@ public class ApplicationInformation extends BasicPage{
     public EditPage editButtonClick () {
         editButton.click();
         return initPage(EditPage.class);
+    }
+
+    public MessagePage deleteButtonClick () throws InterruptedException {
+        deleteButton.click();
+        Thread.sleep(5000);
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        return initPage(MessagePage.class);
     }
 
     public void assertMethod(){
@@ -78,4 +89,5 @@ public class ApplicationInformation extends BasicPage{
     public static final String NUMBER_OF_DOWNLOADS_XPATH = "//div[contains(text(),'# of downloads')]";
     public static final String EDIT_BUTTON_XPATH = "//div[@class='edit-app-button']/a[contains(text(),'Edit')]";
     public static final String POPULAR_APPS_XPATH = "//div[@class='popular-app']/a/div[contains(text(),'App_01')]";
+    public static final String DELETE_BUTTON_XPATH = "//div[@class='edit-app-button']/a[contains(text(),'Delete')]";
 }
