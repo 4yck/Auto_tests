@@ -1,5 +1,6 @@
 package com.dataart.selenium.pages;
 
+import org.fest.assertions.Assertions;
 import org.jcp.xml.dsig.internal.dom.Utils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -25,7 +26,7 @@ public class AjaxTestPage extends BasicPage {
 
     private AjaxTestPage obj;
 
-    public void sumXandY () {
+    public void correctSumXandY () {
         xTextField.sendKeys("21");
         Float x = Float.parseFloat("21");
         yTextField.sendKeys("22");
@@ -37,6 +38,16 @@ public class AjaxTestPage extends BasicPage {
                 ExpectedConditions.visibilityOfElementLocated(By.id("result")));
         Float res = Float.parseFloat(result.getText().substring(result.getText().lastIndexOf(':')+2));
         assertEquals("Check", sum, res);
+    }
+
+    public void incorrectSumXandY () {
+        xTextField.sendKeys("21");
+        yTextField.sendKeys("second part");
+        sumButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement result = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("result")));
+        Assertions.assertThat(result.getText().substring(result.getText().lastIndexOf(':')+2)).isEqualTo("Incorrect data");
     }
 
     public static final String X_XPATH = "//input[@id='x']";

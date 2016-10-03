@@ -84,7 +84,7 @@ public class ApplicationTests extends BaseTest {
         headerPage.myApplicationsButtonClick();
         myapplicationsPage.myApplicationsButtonClick();
         appName = newapplicationPage.getAppName();
-        newapplicationPage.createNewApplicationWithoutImages(appName);
+        newapplicationPage.createNewApplicationWithImages(appName);
         myapplicationsPage.detailsButtonClick();
         appInfo.assertMethod();
     }

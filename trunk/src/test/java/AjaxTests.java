@@ -35,6 +35,15 @@ public class AjaxTests extends BaseTest {
         loginPage.registerANewUser();
         registrationPage.registerAsANewUser(user, "DEVELOPER");
         headerPage.ajaxTestPageButtonClick();
-        ajaxTestPage.sumXandY();
+        ajaxTestPage.correctSumXandY();
+    }
+
+    @Test
+    public void ajaxFalse() {
+        user = newDeveloper();
+        loginPage.registerANewUser();
+        registrationPage.registerAsANewUser(user, "DEVELOPER");
+        headerPage.ajaxTestPageButtonClick();
+        ajaxTestPage.incorrectSumXandY();
     }
 }
