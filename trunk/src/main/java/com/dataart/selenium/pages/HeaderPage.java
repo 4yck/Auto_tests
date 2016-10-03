@@ -11,6 +11,8 @@ public class HeaderPage extends BasicPage {
     WebElement logoutButton;
     @FindBy(xpath = MY_APPLICATIONS_BUTTON_XPATH)
     WebElement myApplicationsButton;
+    @FindBy(xpath = AJAX_TEST_PAGE_XPATH)
+    WebElement ajaxTestPageButton;
 
     public LoginPage logoutButtonClick () {
         logoutButton.click();
@@ -26,6 +28,11 @@ public class HeaderPage extends BasicPage {
         return initPage(MyApplications.class);
     }
 
+    public AjaxTestPage ajaxTestPageButtonClick () {
+        ajaxTestPageButton.click();
+        return initPage(AjaxTestPage.class);
+    }
+
     public LoginPage assertButton() {
         if(driver.findElements(By.xpath("//a[text()= 'My applications']")).isEmpty())
             logoutButton.click();
@@ -34,5 +41,5 @@ public class HeaderPage extends BasicPage {
 
     public static final String MY_APPLICATIONS_BUTTON_XPATH = "//a[text()= 'My applications']";
     public static final String LOGOUT_BUTTON_XPATH = "//a[text()= 'Logout']";
-
+    public static final String AJAX_TEST_PAGE_XPATH = "//a[text()= 'Ajax test page']";
 }

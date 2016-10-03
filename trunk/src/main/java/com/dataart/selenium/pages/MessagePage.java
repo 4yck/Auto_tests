@@ -11,7 +11,4 @@ public class MessagePage extends BasicPage {
         return driver.findElement(By.xpath("//div[@class='content']/p[@class='flash']")).getText();
     }
 
-    /*public String getDeleteMessage() {
-        return driver.findElement(By.xpath("//div[@class='content']/p[@class='flash']")).getText();
-    }*/
 }

@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.simple.parser.ParseException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-//import org.apache.log4j.Logger;
 
 import static com.dataart.selenium.framework.BasePage.driver;
 import static com.dataart.selenium.framework.BasePage.initPage;

@@ -68,8 +68,6 @@ public class RegistrationPage extends BasicPage {
         Select newSelect = new Select(roleDropDownMenu);
         newSelect.selectByVisibleText(name[5]);
         registerButton.click();
-        //нажать назад или сделать логаут, чтобы вновь залогиниться
-        //System.out.println("Name [name= " + name[0] + " , surname=" + name[1] + "]");
     }
 
     public static final String NAME_TEXT_FIELD_XPATH = "//input[@name = 'name']";
