@@ -31,7 +31,6 @@ public class RegistrationPage extends BasicPage {
     WebElement roleDropDownMenu;
     @FindBy(xpath = REGISTER_BUTTON_XPATH)
     WebElement registerButton;
-    //String l = "";
     String cvsSplitBy = ";";
 
     public HomePage registerAsANewUser(User user, String role) {

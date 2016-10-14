@@ -11,6 +11,7 @@ public class BasicPage extends BasePage {
     public final static By flash = By.xpath("//p[@class='flash']");
 
     public LoginPage forceLogout() {
+        //driver.get("http://admin:admin@localhost:8080");
         driver.get(settings.getBaseUrl());
         if (isElementPresent(logoutBy)) {
             driver.findElement(logoutBy).click();

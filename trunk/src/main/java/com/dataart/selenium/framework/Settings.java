@@ -96,7 +96,7 @@ public class Settings {
             case OPERA:
                 return new OperaDriver();
             //case HTMLUNIT:
-              //  return new HtmlUnitDriver();
+            //  return new HtmlUnitDriver();
             default:
                 throw new UnknownBrowserException("Cannot create driver for unknown browser type");
         }
